@@ -3,7 +3,7 @@ import "./FooterStyle.css"
 
 function Footer() {
   return (
-    <div className='footer'>coded by tgalex75 - Menzo Community</div>
+    <div className='footer'>coded by tgalex75 for the Menzo Community</div>
   )
 }
 
