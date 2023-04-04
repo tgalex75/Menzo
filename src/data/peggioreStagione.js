@@ -6,18 +6,18 @@ const peggioreStagione = [
     },
     {
         id: 2,
-        title: "RINNOVO AL DOPPIO",
-        description: "Il contratto del giocatore sarà rinnovato con ingaggio doppio.",
+        title: "SECONDA POSSIBILITA'",
+        description: "La società decide si credere ancora nel giocatore.",
     },
     {
         id: 3,
-        title: "PRESTITO OBBLIGATORIO",
+        title: "PRESTITO!",
         description: "Il giocatore sarà inserito in lista prestiti e ceduto a titolo temporaneo.",
     },
     {
-        id: 4,
-        title: "DIVIETO DI CESSIONE",
-        description: "Il giocatore sarà protetto da eventuale cessione con il blocco di tutte le offerte di mercato.",
+        id: 3,
+        title: "ACQUISTO CONNAZIONALE",
+        description: "Il giocatore verrà premiato con l'acquisto di un suo connazionale.",
     }
 ]
 

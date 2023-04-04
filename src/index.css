@@ -26,14 +26,14 @@
 .light-mode {
   --clr-bg: #efefef;
   --clr-text: #222;
-  --clr-primary: #c80051;
+  --clr-primary: #034b53;
   --clr-card: #eeeeee;
 }
 
 .dark-mode {
   --clr-bg: #131313;
   --clr-text: #d4d3d3;
-  --clr-primary: #ff0066;
+  --clr-primary: #0de2f9;
   --clr-card: #272724;
 }
 
@@ -46,7 +46,7 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   background-color: var(--clr-bg);
   color: var(--clr-text);
   -webkit-font-smoothing: antialiased;

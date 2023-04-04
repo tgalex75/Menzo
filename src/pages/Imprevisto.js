@@ -56,7 +56,7 @@ const Imprevisto = () => {
             },
         },
         "& .MuiInputBase-input": {
-            color: "#efefef",
+            color: "var(--clr-primary)",
             fontSize: "2rem",
             textAlign: "center",
             fontWeight: "600",

@@ -43,17 +43,8 @@ function Navbar(props) {
                         <Link to="/prepartita">
                             <li>Imprevisti Prepartita</li>
                         </Link>
-                        <Link to="/settimana">
-                            <li>Imprevisti della Settimana</li>
-                        </Link>
-                        <Link to="/calcolo-media">
-                            <li>Media Overall</li>
-                        </Link>
                         <Link to="/migliore-peggiore-stagione">
                             <li>Migliore e Peggiore della Stagione</li>
-                        </Link>
-                        <Link to="/regolamento">
-                            <li>Regolamento</li>
                         </Link>
                         <span id="span-menu">MENU</span>
                     </ul>

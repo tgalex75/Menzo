@@ -14,16 +14,11 @@
 }
 
 .container {
-    height: 65%;
+    height: 88%;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-}
-
-.containerBis {
-    height: 30%;
-    margin-top: 1rem;
 }
 
 .riquadro {
@@ -50,7 +45,6 @@
     border: 3px solid var(--clr-primary);
 }
 
-
 .overlay {
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
@@ -65,7 +59,7 @@
     text-align: center;
 }
 
-.links{
+.links {
     padding: 5rem 0;
     z-index: 100;
     color: #efefef;
@@ -73,7 +67,6 @@
 
 .overlay h1 {
     font-size: 3rem;
-
 }
 
 .overlay h2 {
@@ -85,49 +78,16 @@
     color: var(--clr-primary);
 }
 
-.riquadro video {
-    height: 100%;
-    width: auto;
-}
-
-.riquadro video[poster] {
-    object-fit: cover;
-}
-
 .logo-team {
     width: auto;
-    height: 7rem;
+    height: 15rem;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-.coppa {
-    width: auto;
-    height: 15rem;
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: .3;
-}
-
-.siamoTornati {
-    width: auto;
-    height: 10rem;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    margin: 2rem;
-    z-index: 200;
-    transform: rotate(10deg);
-}
-
-.siamoTornati img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    opacity: .1;
+    border-radius: 50%;
+    filter: grayscale(80%);
 }
 
 @media (max-width: 768px) {
@@ -138,7 +98,7 @@
     .overlay h1 {
         font-size: 2.1rem;
     }
-    
+
     .overlay h2 {
         font-size: 1.2rem;
     }
@@ -147,15 +107,7 @@
         margin: 0.8rem;
     }
 
-    .logo-team{
+    .logo-team {
         height: 5rem;
-    }
-
-    .coppa {
-        display: none;
-    }
-
-    .siamoTornati {
-        display: none;
     }
 }

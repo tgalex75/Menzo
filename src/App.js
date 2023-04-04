@@ -5,8 +5,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import Footer from "./components/Footer";
-//import DecorationsUp from "./components/DecorationsUp";
-import BgRotate from "./components/BgRotate";
+//import BgRotate from "./components/BgRotate";
 
 export default function App() {
     // Salvare lo stato "theme" nel localStorage
@@ -38,8 +37,6 @@ export default function App() {
                 <Navbar theme={theme} cambiaTema={cambiaTema} />
                 <AnimatedRoutes />
             </Router>
-            <BgRotate />
-            {/*<DecorationsUp /> */}
             <Footer />
         </>
     );

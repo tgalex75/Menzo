@@ -6,8 +6,8 @@ const miglioreStagione = [
     },
     {
         id: 2,
-        title: "DIVIETO DI CESSIONE",
-        description: "Il giocatore sarà blindato con il blocco di tutte le offerte di mercato.",
+        title: "BLOCCO DELLE OFFERTE",
+        description: "Saranno respinte tutte le offerte di mercato relative al giocatore.",
     },
     {
         id: 3,
@@ -16,8 +16,8 @@ const miglioreStagione = [
     },
     {
         id: 4,
-        title: "COME BONUCCI...!",
-        description: "Il giocatore verrà ceduto perché ha tradito la causa del Grifo.",
+        title: "CESSIONE OBBLIGATORIA",
+        description: "Il giocatore verrà ceduto.",
     }
 ]
 
