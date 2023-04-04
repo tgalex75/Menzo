@@ -1,10 +1,10 @@
 const prepartita = [
     {
         id: 1,
-        title: "nessun imprevisto",
-        description: "-",
-        isImprev: false,
-        ultEstrazione: false
+        title: "CREDO IN TE",
+        description: "Schiera titolare uno tra i tre peggiori giocatori in rosa.",
+        isImprev: true,
+        ultEstrazione: true
     },
     {
         id: 2,
@@ -155,10 +155,10 @@ const prepartita = [
     },
     {
         id: 23,
-        title: "nessun imprevisto",
-        description: "-",
-        isImprev: false,
-        ultEstrazione: false
+        title: "CREDO IN TE",
+        description: "Schiera titolare uno tra i tre peggiori giocatori in rosa.",
+        isImprev: true,
+        ultEstrazione: true
     },
     {
         id: 24,
