@@ -1,0 +1,120 @@
+/* Titoli Falconero  #fd0029 */
+
+nav {
+    width: 100%;
+    height: auto;
+    padding: 0.8rem 1.5rem;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.logo {
+    width: 2.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+.menu {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0.3rem;
+}
+
+.menu svg {
+    font-size: 1.8rem;
+}
+
+.menu:hover {
+    background-color: rgba(128, 128, 128, 0.4);
+}
+
+.nav-menu {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.97);
+    color: var(--clr-text);
+    z-index: -1;
+    transition: 0.3s;
+    padding: 5rem 7rem;
+}
+
+.nav-menu.active {
+    left: 0;
+    color: var(--clr-text) !important;
+}
+
+.nav-menu li,
+a {
+    list-style-type: none;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--clr-text);
+    position: relative;
+    word-spacing: .8rem;
+}
+
+.nav-menu a:visited {
+    color: var(--clr-text);
+}
+
+.nav-menu li:hover {
+    color: var(--clr-primary);
+}
+
+.nav-menu li:visited {
+    color: var(--clr-text);
+}
+
+#span-menu {
+    letter-spacing: 0.4em;
+    text-orientation: upright;
+    writing-mode: vertical-lr;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding-right: 0.6em;
+    font-size: 1.8rem;
+    font-weight: 800;
+    opacity: 0.8;
+    color: var(--clr-primary);
+    opacity: 40%;
+}
+
+@media (max-width: 768px) {
+
+    .nav-menu {
+        background-color: #000;
+    }
+
+    .nav-menu li,
+    a {
+        font-size: 1.5rem;
+    }
+    #span-menu {
+        font-size: 1.2rem;
+        bottom: 5rem;
+
+    }
+}

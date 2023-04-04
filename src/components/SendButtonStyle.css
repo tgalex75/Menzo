@@ -1,0 +1,23 @@
+
+.sendButton {
+    border-radius: 50%;
+    padding: 2.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    z-index: 100;
+}
+
+.sendButton svg {
+    font-size: 5rem;
+}
+
+.sendButton:hover {
+    background-color: rgba(128, 128, 128, 0.4);
+    transition: var(--btn-transition);
+}
