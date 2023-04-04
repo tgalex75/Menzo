@@ -7,7 +7,7 @@ const peggioreStagione = [
     {
         id: 2,
         title: "SECONDA POSSIBILITA'",
-        description: "La società decide si credere ancora nel giocatore.",
+        description: "La società decide di credere ancora nel giocatore.",
     },
     {
         id: 3,
@@ -17,7 +17,7 @@ const peggioreStagione = [
     {
         id: 3,
         title: "ACQUISTO CONNAZIONALE",
-        description: "Il giocatore verrà premiato con l'acquisto di un suo connazionale.",
+        description: "Il giocatore verrà aiutato con l'acquisto di un suo connazionale.",
     }
 ]
 
