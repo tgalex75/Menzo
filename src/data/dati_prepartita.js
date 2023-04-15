@@ -15,7 +15,7 @@ const prepartita = [
     },
     {
         id: 3,
-        title: "nessun imprevisto",
+        title:  il giocatore viene trovato ubriaco la sera prima",
         description: "-",
         isImprev: false,
         ultEstrazione: false
