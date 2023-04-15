@@ -15,10 +15,10 @@ const prepartita = [
     },
     {
         id: 3,
-        title:  il giocatore viene trovato ubriaco la sera prima",
-        description: "-",
-        isImprev: false,
-        ultEstrazione: false
+        title:  la sera leoni la mattina.... tribuna",
+        description: "-", il giocatore é stato avvistato in discoteca alla vigilia del match
+        isImprev: true,
+        ultEstrazione: true
     },
     {
         id: 4,
@@ -29,10 +29,10 @@ const prepartita = [
     },
     {
         id: 5,
-        title: "nessun imprevisto",
+        title:  cambio di fascia ",
         description: "-",
-        isImprev: false,
-        ultEstrazione: false
+        isImprev: true,
+        ultEstrazione: true
     },
     {
         id: 6,
