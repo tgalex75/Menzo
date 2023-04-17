@@ -44,7 +44,7 @@ function Navbar(props) {
                             <li>Imprevisti Prepartita</li>
                         </Link>
                         <Link to="/migliore-peggiore-stagione">
-                            <li>Migliore e Peggiore della Stagione</li>
+                            <li>Migliore e Peggiore</li>
                         </Link>
                         <span id="span-menu">MENU</span>
                     </ul>

@@ -130,7 +130,7 @@ function MigliorePeggiore() {
                     </div>
                 )}
                 <Tooltip
-                    title="Estrai il migliore ed il peggiore della Stagione"
+                    title="Estrai il migliore ed il peggiore"
                     placement="top"
                     arrow
                 >
@@ -151,7 +151,7 @@ function MigliorePeggiore() {
                         count === 0 ? { display: "block", padding : "10rem 5rem 0", color: "var(--clr-primary)", fontWeight: 700} : { display: "none" }
                     }
                 >
-                    Estrai il migliore ed il peggiore della Stagione
+                    Estrai il migliore ed il peggiore
                 </p>
             </div>
         </motion.div>
