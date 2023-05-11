@@ -4,7 +4,7 @@ const prepartita = [
         title: "CREDO IN TE",
         description: "Schiera titolare uno tra i tre peggiori giocatori in rosa.",
         isImprev: true,
-        ultEstrazione: true
+        ultEstrazione: false
     },
     {
         id: 2,
@@ -16,7 +16,7 @@ const prepartita = [
     {
         id: 3,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
@@ -30,7 +30,7 @@ const prepartita = [
     {
         id: 5,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
@@ -39,19 +39,19 @@ const prepartita = [
         title: "PAROLA ALLA COMMUNITY!",
         description: "L'avete voluto voi...",
         isImprev: true,
-        ultEstrazione: true
+        ultEstrazione: false
     },
     {
         id: 7,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
     {
         id: 8,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
@@ -65,14 +65,14 @@ const prepartita = [
     {
         id: 10,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
     {
         id: 11,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
@@ -86,14 +86,14 @@ const prepartita = [
     {
         id: 13,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
     {
         id: 14,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
@@ -102,19 +102,19 @@ const prepartita = [
         title: "CREDO IN TE",
         description: "Schiera titolare uno tra i tre peggiori giocatori in rosa.",
         isImprev: true,
-        ultEstrazione: true
+        ultEstrazione: false
     },
     {
         id: 16,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
     {
         id: 17,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
@@ -128,14 +128,14 @@ const prepartita = [
     {
         id: 19,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
     {
         id: 20,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
@@ -149,7 +149,7 @@ const prepartita = [
     {
         id: 22,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
@@ -158,19 +158,19 @@ const prepartita = [
         title: "CREDO IN TE",
         description: "Schiera titolare uno tra i tre peggiori giocatori in rosa.",
         isImprev: true,
-        ultEstrazione: true
+        ultEstrazione: false
     },
     {
         id: 24,
         title: "PAROLA ALLA COMMUNITY!",
         description: "L'avete voluto voi...",
         isImprev: true,
-        ultEstrazione: true
+        ultEstrazione: false
     },
     {
         id: 25,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
@@ -184,7 +184,7 @@ const prepartita = [
     {
         id: 27,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
@@ -198,7 +198,7 @@ const prepartita = [
     {
         id: 29,
         title: "nessun imprevisto",
-        description: "-",
+        description: "",
         isImprev: false,
         ultEstrazione: false
     },
