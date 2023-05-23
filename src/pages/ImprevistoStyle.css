@@ -41,10 +41,10 @@
     font-weight: 600;
     font-size: 1.2rem;
     padding: 0 15rem;
-}
+}/*  */
 
-@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
-
+/* @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+ */
 .isImprevisto {
     text-align: center;
     font-family: "Permanent Marker", cursive;
@@ -154,8 +154,8 @@
     flex-basis: 30%;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap");
-
+/* @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap");
+ */
 .tshirt span {
     font-weight: 700;
     font-family: "Oswald", sans-serif;
