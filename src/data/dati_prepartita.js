@@ -71,24 +71,24 @@ const prepartita = [
     },
     {
         id: 11,
-        title: "nessun imprevisto",
-        description: "",
-        isImprev: false,
+        title: "SPECCHIO RIFLESSO!",
+        description: "Imposta la formazione perfettamente a specchio rispetto a quella dell'avversario",
+        isImprev: true,
         ultEstrazione: false
     },
     {
         id: 12,
-        title: "INFORTUNIO!",
-        description: "Il giocatore estratto salterà la partita per infortunio.",
-        isImprev: true,
-        ultEstrazione: true
-    },
-    {
-        id: 13,
         title: "nessun imprevisto",
         description: "",
         isImprev: false,
         ultEstrazione: false
+    },
+    {
+        id: 13,
+        title: "INFORTUNIO!",
+        description: "Il giocatore estratto salterà la partita per infortunio.",
+        isImprev: true,
+        ultEstrazione: true
     },
     {
         id: 14,
