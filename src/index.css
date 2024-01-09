@@ -1,63 +1,78 @@
-:root {
-  /* Colors
-    --dark-blue: #03045eff;
-    --secondary-blue: #0077b6ff;
-    --primary-blue: rgb(56, 146, 194);
-    --light-blue: #90e0efff;
-    --bg-blue: #caf0f8ff;
-    --text-color: #efefef;
-    --grey-color: #d4d3d3;
-    --delete-color: #df372b;
-    --divider-color: rgba(0, 0, 0, 0.1);
-    --dark-bg: #222;
-    --soft-dark: #272724; */
-  /* Global */
-  --letter-spacing: 0.08rem;
-  --transition: all 0.3s linear;
-  --btn-transition: all 0.6s ease;
-  --radius: 0.25rem;
-  --img-radius: 0.25rem 0.25rem 0rem 0rem;
-  --card-radius: 0rem 0rem 0.25rem 0.25rem;
-  --btn-radius: 16px;
-  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  --dark-shadow: 4px 5px 15px rgba(5, 6, 6, 0.4);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.light-mode {
-  --clr-bg: #efefef;
-  --clr-text: #222;
-  --clr-primary: #034b53;
-  --clr-card: #eeeeee;
-}
-
-.dark-mode {
-  --clr-bg: #131313;
-  --clr-text: #d4d3d3;
-  --clr-primary: #0de2f9;
-  --clr-card: #272724;
-}
-
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
+* {
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: "Montserrat", sans-serif;
-  background-color: var(--clr-bg);
-  color: var(--clr-text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: var(--transition);
+:root {
+  --clr-prim: #149dcc;
+  --clr-sec: #fcc90d;
+  --clr-ter: #105442;
 }
 
-/* .centered {
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #232323;
+  color: #eeeeee;
+  overflow: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* Tshirt estrazione */
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap");
+
+/* IMPREVISTO TIMBRO */
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Scribble&display=swap');
+
+/* Imprevisti della Community - Testo */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap');
+
+/* Titoli H1 */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap');
+
+h1 {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 3rem);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.t-dOnDMp {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-} */
+  width: 25vw;
+  height: 60vh;
+  border: 0.3rem solid var(--clr-prim);
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  justify-items: center;
+}
 
+.c-bOcPnF-cmFMMs-color-primary {
+  background-color: var(--clr-prim) !important;
+  border-color: var(--clr-prim) !important;
+}
+
+@media screen and (max-width: 767px) {
+  .t-dOnDMp {
+    width: 75vw;
+    height: 70vh;
+  }
+}

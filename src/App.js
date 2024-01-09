@@ -1,43 +1,45 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import AnimatedRoutes from "./components/AnimatedRoutes";
-import Navbar from "./components/Navbar";
+import "./App.css";
+//import Home from "./Pages/Home";
+import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
+import Sfondo from "./Components/Sfondo";
 import { BrowserRouter as Router } from "react-router-dom";
+import AnimatedRoutes from "./Components/AnimatedRoutes";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { supabase } from "./supabaseClient";
+import { useState, useEffect } from "react";
 
-import Footer from "./components/Footer";
-//import BgRotate from "./components/BgRotate";
+function App(props) {
+  const [session, setSession] = useState(null);
 
-export default function App() {
-    // Salvare lo stato "theme" nel localStorage
-    const getFromLocalStorage = () => {
-        return localStorage.getItem("theme")
-            ? localStorage.getItem("theme")
-            : "dark-mode";
-    };
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
 
-    /* Funzione che aggiorna il tema in base allo State */
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
 
-    const [theme, setTheme] = useState(getFromLocalStorage());
+    return () => subscription.unsubscribe();
+  }, []);
 
-    // Funzione che cambia il tema in base al valore dello State
-
-    const cambiaTema = () => {
-        theme === "light-mode" ? setTheme("dark-mode") : setTheme("light-mode");
-    };
-
-    // Al cambio ddello state "theme" verrà attaccata una classe al TAG html
-    useEffect(() => {
-        document.documentElement.className = theme;
-        localStorage.setItem("theme", theme);
-    }, [theme]);
-
+  if (!session) {
+    return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" providers={[]} className="w-1/2"/>;
+  } else {
     return (
-        <>
-            <Router>
-                <Navbar theme={theme} cambiaTema={cambiaTema} />
-                <AnimatedRoutes />
-            </Router>
-            <Footer />
-        </>
+      <main className="h-screen w-screen overflow-hidden">
+        <Router>
+          <Navbar />
+          <AnimatedRoutes />
+        </Router>
+        <Footer session={session} />
+        <Sfondo />
+      </main>
     );
+  }
 }
+export default App;
