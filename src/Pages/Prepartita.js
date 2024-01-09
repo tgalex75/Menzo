@@ -3,13 +3,12 @@ import { randomNumber } from "../Funzioni/RandomNumber";
 import datiPrepartita from "../Data/datiPrepartita";
 import SecondaEstrazione from "../Components/SecondaEstrazione";
 import FetchImprevisto from "../Funzioni/FetchImprevisto";
-import { motion } from "framer-motion";
 import LayoutBase from "../Components/LayoutBase";
 import Dado from "../Components/Dado";
 import SecondaEstrazioneDiretta from "../Components/SecondaEstrazioneDiretta";
 
 const Prepartita = () => {
-  const [casuale, setCasuale] = useState(6);
+  const [casuale, setCasuale] = useState(null);
 
   // Prima Estrazione
 
