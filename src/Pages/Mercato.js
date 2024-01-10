@@ -3,23 +3,11 @@ import Dado from "../Components/Dado";
 import { motion } from "framer-motion";
 import { supabase } from "../supabaseClient";
 import random from "random";
-import DenmarkFlag from "../assets/imgs/Flags/DenmarkFlag.svg";
-import FinlandFlag from "../assets/imgs/Flags/FinlandFlag.svg";
-import SwedenFlag from "../assets/imgs/Flags/SwedenFlag.svg";
-import EstoniaFlag from "../assets/imgs/Flags/EstoniaFlag.svg";
-import CanadaFlag from "../assets/imgs/Flags/CanadaFlag.svg";
+import { v4 as uuidv4 } from "uuid";
 
 const Mercato = () => {
   const [datiMercato, setDatiMercato] = useState(null);
   const [casuale, setCasuale] = useState("");
-
-  const flags = [
-    { id: 5, flag: EstoniaFlag },
-    { id: 6, flag: SwedenFlag },
-    { id: 7, flag: FinlandFlag },
-    { id: 8, flag: DenmarkFlag },
-    { id: 9, flag: CanadaFlag },
-  ];
 
   useEffect(() => {
     fetchLista();
@@ -48,14 +36,14 @@ const Mercato = () => {
   useEffect(() => {
     setTimeout(() => {
       casuale.id > 4 && delElemento(casuale.id);
-    }, 2000);
-  },[casuale]);
+    }, 3000);
+  }, [casuale]);
 
   const estraiNumeroCasuale = () => {
     setCasuale(random.choice(datiMercato));
   };
-  const isNewArea = casuale.nazione != null;
 
+  const isNewArea = casuale.nazione != null
 
   return (
     <section className="flex h-full w-full select-none flex-col items-center justify-around gap-2 px-4 py-6 font-bold md:p-8">
@@ -65,9 +53,15 @@ const Mercato = () => {
         initial={{ opacity: 0, x: "-10vw" }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.4, duration: 0.4, type: "spring" }}
-        key={casuale.nazione}
+        key={uuidv4()}
         id="containerPrimaEstrazione"
-        style={isNewArea ? { color: "var(--clr-prim)" } : {}}
+        style={
+          isNewArea
+            ? {
+                color: "var(--clr-prim)",
+              }
+            : {}
+        }
         className="flex h-full w-full select-none flex-col items-center justify-center gap-6 rounded-xl bg-black/50 px-4 pb-4 text-center shadow-lg ring ring-inset ring-white/75 md:px-10 md:pb-8"
       >
         {!casuale && (
