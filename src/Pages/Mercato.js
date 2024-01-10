@@ -6,13 +6,12 @@ import random from "random";
 import DenmarkFlag from "../assets/imgs/Flags/DenmarkFlag.svg";
 import FinlandFlag from "../assets/imgs/Flags/FinlandFlag.svg";
 import SwedenFlag from "../assets/imgs/Flags/SwedenFlag.svg";
-//import IcelandFlag from "../assets/imgs/Flags/IcelandFlag.svg";
 import EstoniaFlag from "../assets/imgs/Flags/EstoniaFlag.svg";
 import CanadaFlag from "../assets/imgs/Flags/CanadaFlag.svg";
 
 const Mercato = () => {
   const [datiMercato, setDatiMercato] = useState(null);
-  const [casuale, setCasuale] = useState(null);
+  const [casuale, setCasuale] = useState("");
 
   const flags = [
     { id: 5, flag: EstoniaFlag },
@@ -20,7 +19,6 @@ const Mercato = () => {
     { id: 7, flag: FinlandFlag },
     { id: 8, flag: DenmarkFlag },
     { id: 9, flag: CanadaFlag },
-    //{ id: 10, flag: IcelandFlag },
   ];
 
   useEffect(() => {
@@ -39,23 +37,25 @@ const Mercato = () => {
     );
   };
 
-  const delElemento = async () => {
+  const delElemento = async (country) => {
     const { error } = await supabase
       .from("zz_menzo_mercato")
-      .delete("nazione")
-      .eq("nazione", isMercato && casuale.nazione);
+      .delete("id")
+      .eq("id", country);
     error && console.log(error);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      casuale.id > 4 && delElemento(casuale.id);
+    }, 2000);
+  },[casuale]);
+
   const estraiNumeroCasuale = () => {
     setCasuale(random.choice(datiMercato));
-    delElemento()
-    fetchLista()
   };
+  const isNewArea = casuale.nazione != null;
 
-  const isMercato = casuale.nazione !== "";
-
-  console.log(isMercato);
 
   return (
     <section className="flex h-full w-full select-none flex-col items-center justify-around gap-2 px-4 py-6 font-bold md:p-8">
@@ -65,9 +65,9 @@ const Mercato = () => {
         initial={{ opacity: 0, x: "-10vw" }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.4, duration: 0.4, type: "spring" }}
-        key={casuale}
+        key={casuale.nazione}
         id="containerPrimaEstrazione"
-        style={isMercato ? { color: "var(--clr-prim)" } : {}}
+        style={isNewArea ? { color: "var(--clr-prim)" } : {}}
         className="flex h-full w-full select-none flex-col items-center justify-center gap-6 rounded-xl bg-black/50 px-4 pb-4 text-center shadow-lg ring ring-inset ring-white/75 md:px-10 md:pb-8"
       >
         {!casuale && (
@@ -85,7 +85,7 @@ const Mercato = () => {
               style={{ filter: "drop-shadow(.05rem .05rem 0.1rem #000)" }}
               className="text-4xl font-extrabold uppercase md:text-5xl"
             >
-              {isMercato ? "NUOVA AREA DI MERCATO" : "Nessuna nuova area"}
+              {isNewArea ? "NUOVA AREA DI MERCATO" : "Nessuna nuova area"}
             </h3>
             <p
               style={{
@@ -94,7 +94,7 @@ const Mercato = () => {
               }}
               className="mt-4 px-4 text-2xl md:w-3/5 md:text-7xl"
             >
-              {isMercato && casuale.nazione}
+              {casuale.nazione}
             </p>
           </>
         )}
