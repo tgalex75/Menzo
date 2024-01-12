@@ -13,8 +13,18 @@ const giocatoreNum = isMobile ? "G n. " : "Giocatore n. ";
 const overallPlaceholder = isMobile ? "OV" : "Overall";
 
 const MediaOverall = () => {
+
   const selectRef = useRef(null);
-  const [schema, setSchema] = useState("4-4-2");
+
+  const [schema, setSchema] = useState(() => {
+    const saved = localStorage.getItem("schema");
+    const initialValue = JSON.parse(saved);
+    return initialValue || "4-4-2";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("schema", JSON.stringify(schema));
+  }, [schema]);
 
   const filteredTactics = listaTattiche.filter((item) => item.nome === schema);
 
@@ -77,6 +87,7 @@ const MediaOverall = () => {
       <div className="md:self-end md:pe-6">
         {mySelect("Scegli la tattica", selectRef, getSchema, tattiche)}
       </div>
+      <h3 className="text-3xl font-black">{schema}</h3>
       {schema && tactics(data, handleChange, valoriOverall)}
       <div
         style={result < 1 ? { visibility: "hidden" } : {}}

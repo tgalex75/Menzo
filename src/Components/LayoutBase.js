@@ -5,11 +5,6 @@ const LayoutBase = ({ titoloH1, id, isImprev, casuale, children }) => {
   return (
     <section
       className="flex h-[100dvh] w-full select-none flex-col items-center justify-start gap-2 px-4 py-6 font-bold md:justify-around md:p-8"
-      /* style={
-        !casuale
-          ? { justifyContent: "space-around" }
-          : { justifyContent: "space-around" }
-      } */
     >
       {/* BOX PRIMA ESTRAZIONE */}
       <h1>{titoloH1}</h1>
