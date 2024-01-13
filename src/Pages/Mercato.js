@@ -8,6 +8,15 @@ import { v4 as uuidv4 } from "uuid";
 const Mercato = () => {
   const [datiMercato, setDatiMercato] = useState(null);
   const [casuale, setCasuale] = useState("");
+  const [registroAree, setRegistroAree] = useState(() => {
+    const saved = localStorage.getItem("regAree");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("regAree", JSON.stringify(registroAree));
+  }, [registroAree]);
 
   useEffect(() => {
     fetchLista();
@@ -36,14 +45,22 @@ const Mercato = () => {
   useEffect(() => {
     setTimeout(() => {
       casuale.id > 4 && delElemento(casuale.id);
-    }, 3000);
+    }, 2500);
   }, [casuale]);
 
   const estraiNumeroCasuale = () => {
     setCasuale(random.choice(datiMercato));
+    casuale.id > 4 &&
+      setTimeout(() => {
+        setRegistroAree([
+          ...registroAree,
+          { id: uuidv4(), area: casuale.nazione },
+        ]);
+      });
+    fetchLista();
   };
 
-  const isNewArea = casuale.nazione != null
+  const isNewArea = casuale.nazione != null;
 
   return (
     <section className="flex h-full w-full select-none flex-col items-center justify-around gap-2 px-4 py-6 font-bold md:p-8">
@@ -69,7 +86,7 @@ const Mercato = () => {
             style={{ fontFamily: "'Roboto', cursive" }}
             className="text-5xl italic"
           >
-            Lancia il dado...
+            Avvia estrazione...
           </h2>
         )}
 
@@ -90,6 +107,20 @@ const Mercato = () => {
             >
               {casuale.nazione}
             </p>
+            {registroAree.length > 0 && (
+              <div className="absolute bottom-4 flex h-36 w-full flex-col items-center justify-between border-t-2 text-[--clr-sec]">
+                <h4 className="py-4">Aree di Mercato già estratte</h4>
+                <div className="mb-4 flex items-center justify-around gap-12 px-24">
+                  {registroAree.slice(0, 5).map((el) => {
+                    return (
+                      <h3 id={el.id} className="mx-4 text-xl font-black">
+                        {el.area}
+                      </h3>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </>
         )}
       </motion.div>

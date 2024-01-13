@@ -22,7 +22,7 @@ const LayoutBase = ({ titoloH1, id, isImprev, casuale, children }) => {
             style={{ fontFamily: "'Roboto', cursive" }}
             className="flex h-full items-center justify-center text-5xl italic"
           >
-            Estrai...
+            Avvia estrazione...
           </h2>
         )}
         {children}
