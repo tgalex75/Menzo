@@ -32,8 +32,6 @@ export default function FetchData() {
   };
   
   return (
-    <>
-    <h4 className="text-4xl italic">{imprevisto.titolo}</h4>
     <p
       style={{ fontFamily: "'Roboto', cursive" }}
       className={`h-fit flex-1 overflow-y-auto px-4 ${
@@ -43,6 +41,5 @@ export default function FetchData() {
       {imprevisto.descrizione}
 
     </p>
-      </>
   );
 }

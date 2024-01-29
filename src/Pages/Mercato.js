@@ -8,30 +8,23 @@ import { v4 as uuidv4 } from "uuid";
 const Mercato = () => {
   const [datiMercato, setDatiMercato] = useState(null);
   const [casuale, setCasuale] = useState("");
-  const [registroAree, setRegistroAree] = useState(() => {
-    const saved = localStorage.getItem("regAree");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("regAree", JSON.stringify(registroAree));
-  }, [registroAree]);
+  const [registroAree, setRegistroAree] = useState([]);
 
   useEffect(() => {
     fetchLista();
+    fetchAree();
   }, []);
 
   const fetchLista = async () => {
     let { data: zz_menzo_mercato, error } = await supabase
       .from("zz_menzo_mercato")
       .select("*");
-    setDatiMercato(
-      zz_menzo_mercato
-        ? zz_menzo_mercato
-        : { id: 0, nazione: "Tutte le aree sono state sbloccate" } &&
-            console.log(error),
-    );
+    setDatiMercato(zz_menzo_mercato ? zz_menzo_mercato : console.log(error));
+  };
+
+  const fetchAree = async () => {
+    let { data: regAree, error } = await supabase.from("regAree").select("*");
+    regAree ? setRegistroAree(regAree) : console.log(error);
   };
 
   const delElemento = async (country) => {
@@ -42,25 +35,28 @@ const Mercato = () => {
     error && console.log(error);
   };
 
+  const insertArea = async (country) => {
+    const { data, error } = await supabase
+      .from("regAree")
+      .insert([{ id: uuidv4(), area: country }])
+      .select();
+      data ? console.log(data) : console.log(error)
+  };
+
   useEffect(() => {
     setTimeout(() => {
-      casuale.id > 4 && delElemento(casuale.id);
-    }, 2500);
+      delElemento(casuale.id);
+      casuale.nazione != null && insertArea(casuale.nazione);
+    }, 1800);
   }, [casuale]);
 
   const estraiNumeroCasuale = () => {
     setCasuale(random.choice(datiMercato));
-    casuale.id > 4 &&
-      setTimeout(() => {
-        setRegistroAree([
-          ...registroAree,
-          { id: uuidv4(), area: casuale.nazione },
-        ]);
-      });
     fetchLista();
+    fetchAree();
   };
 
-  const isNewArea = casuale.nazione != null;
+  const isNewArea = casuale.nazione !== null;
 
   return (
     <section className="flex h-full w-full select-none flex-col items-center justify-around gap-2 px-4 py-6 font-bold md:p-8">
@@ -86,7 +82,7 @@ const Mercato = () => {
             style={{ fontFamily: "'Roboto', cursive" }}
             className="text-5xl italic"
           >
-            Avvia estrazione...
+            {registroAree.length > 4 ? "Hai sbloccato tutte le AREE MERCATO!" : "Avvia estrazione..."}
           </h2>
         )}
 
@@ -109,7 +105,7 @@ const Mercato = () => {
             </p>
             {registroAree.length > 0 && (
               <div className="absolute bottom-4 flex h-36 w-full flex-col items-center justify-between border-t-2 text-[--clr-sec]">
-                <h4 className="py-4">Aree di Mercato già estratte</h4>
+                <h4 className="py-4">{registroAree.length <5 ? "Aree di Mercato già estratte" : "Tutte le Aree sono state Estratte"}</h4>
                 <div className="mb-4 flex items-center justify-around gap-12 px-24">
                   {registroAree.slice(0, 5).map((el) => {
                     return (
@@ -124,7 +120,7 @@ const Mercato = () => {
           </>
         )}
       </motion.div>
-      {Dado(estraiNumeroCasuale)}
+      { registroAree.length < 5 && Dado(estraiNumeroCasuale)}
     </section>
   );
 };

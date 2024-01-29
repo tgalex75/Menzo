@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import sddefault from "../assets/imgs/sddefault.jpg";
 import team from "../assets/imgs/team.jpg";
-import zlatan from "../assets/imgs/zlatan.jpg";
+import stadion from "../assets/imgs/stadion.jpg";
 import { isMobile } from "react-device-detect";
 
 const dettagliImprevisti = [
@@ -16,7 +16,7 @@ const dettagliImprevisti = [
     {
         id: 3,
         impr: "Media Overall",
-        img: zlatan,
+        img: stadion,
         link: "/calcolo-media",
     },
 ];
