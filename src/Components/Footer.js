@@ -17,7 +17,7 @@ const Footer = (props) => {
       <small className="z-10 ps-4 opacity-20">
         coded by tgalex75 - Menzo Community - beta version
       </small>
-      <img className="h-auto w-24 me-10 z-20" src={baffo} alt="baffo nordico" />
+      <img className="h-auto w-24 me-10 z-20 opacity-70" src={baffo} alt="baffo nordico" />
     </div>
   );
 };
