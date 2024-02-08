@@ -69,20 +69,6 @@ const prepartita = [
         isImprev: true,
         ultEstrazione: false
     },
-    {
-        id: 11,
-        title: "nessun imprevisto",
-        description: "La benevolenza di Odino ci accompagnerà in battaglia",
-        isImprev: false,
-        ultEstrazione: false
-    },
-    {
-        id: 12,
-        title: "nessun imprevisto",
-        description: "Il Dio del Tuono è dalla nostra: non possiamo deluderlo",
-        isImprev: false,
-        ultEstrazione: false
-    },
 ]
 
 export default prepartita;
