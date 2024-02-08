@@ -13,8 +13,8 @@ const giocatoreNum = isMobile ? "G n. " : "Giocatore n. ";
 const overallPlaceholder = isMobile ? "OV" : "Overall";
 
 const MediaOverall = () => {
-
   const selectRef = useRef(null);
+  const selectRefMassimale = useRef(null);
 
   const [schema, setSchema] = useState(() => {
     const saved = localStorage.getItem("schema");
@@ -22,9 +22,19 @@ const MediaOverall = () => {
     return initialValue || "4-4-2";
   });
 
+  const [massimale, setMassimale] = useState(() => {
+    const saved = localStorage.getItem("massimale");
+    const initialValue = JSON.parse(saved);
+    return initialValue || "2";
+  });
+
   useEffect(() => {
     localStorage.setItem("schema", JSON.stringify(schema));
   }, [schema]);
+
+  useEffect(() => {
+    localStorage.setItem("massimale", JSON.stringify(massimale));
+  }, [massimale]);
 
   const filteredTactics = listaTattiche.filter((item) => item.nome === schema);
 
@@ -34,6 +44,10 @@ const MediaOverall = () => {
 
   const getSchema = () => {
     setSchema(selectRef.current.value);
+  };
+
+  const getMassimale = () => {
+    setMassimale(selectRefMassimale.current.value);
   };
 
   let valoriOverall = arrayRange(45, 99, 1);
@@ -84,8 +98,15 @@ const MediaOverall = () => {
       className="flex h-full w-full flex-col items-center justify-around gap-2 bg-black/30 "
     >
       <h1>Media Overall</h1>
-      <div className="md:self-end md:pe-6">
+      <div className="absolute right-2 top-1/3 flex flex-col gap-1 md:self-end md:pe-6">
         {mySelect("Scegli la tattica", selectRef, getSchema, tattiche)}
+        {mySelect("Scegli il massimale", selectRefMassimale, getMassimale, [
+          "",
+          "+2",
+          "+3",
+          "+4",
+          "+5",
+        ])}
       </div>
       <h3 className="text-3xl font-black">{schema}</h3>
       {schema && tactics(data, handleChange, valoriOverall)}
@@ -96,8 +117,11 @@ const MediaOverall = () => {
         <span className="text-md md:text-xl">Media:</span>
         <h4 className="text-6xl md:text-9xl">{result}</h4>
         <p className="md:text-md text-sm">
-          Limite massimo: {parseInt(result) + 2}
+          Limite massimo: {parseInt(result) + parseInt(massimale)}
         </p>
+        <small className="text-sm font-medium">
+          Massimale applicato: +{parseInt(massimale)}
+        </small>
       </div>
     </main>
   );
