@@ -19,7 +19,7 @@ const MediaOverall = () => {
   const [schema, setSchema] = useState(() => {
     const saved = localStorage.getItem("schema");
     const initialValue = JSON.parse(saved);
-    return initialValue || "4-4-2";
+    return initialValue || "4-2-3-1";
   });
 
   const [massimale, setMassimale] = useState(() => {
@@ -75,7 +75,7 @@ const MediaOverall = () => {
 
   const tactics = (arr, func, val) => {
     return (
-      <section id="schemi" className="flex h-[40vh] w-3/4 flex-col">
+      <section id="schemi" className="flex h-[40vh] w-3/4 flex-col-reverse">
         {filteredTactics[0].formazione.map((el, i, array) => (
           <ModuloTattica
             key={i}
@@ -101,7 +101,7 @@ const MediaOverall = () => {
       <div className="absolute right-2 top-1/3 flex flex-col gap-1 md:self-end md:pe-6">
         {mySelect("Scegli la tattica", selectRef, getSchema, tattiche)}
         {mySelect("Scegli il massimale", selectRefMassimale, getMassimale, [
-          "",
+          "---",
           "+2",
           "+3",
           "+4",

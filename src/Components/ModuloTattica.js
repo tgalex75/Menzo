@@ -8,7 +8,7 @@ const ModuloTattica = (props) => {
     <div className="flex items-center justify-center gap-2">
         {arr.slice(start, end).map((el) => {
           return (
-            <div key={el.id} className={`flex flex-col items-center ${(end - start) > 3 && "first:mt-4 last:mt-4"}`}>
+            <div key={el.id} className={`flex flex-col items-center ${(end - start) > 3 && "first:mb-4 last:mb-4"}`}>
               <label
                 htmlFor={`p${el.id}`}
                 className="md:text-md block text-xs font-semibold text-gray-300"

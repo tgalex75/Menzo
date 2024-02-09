@@ -1,13 +1,22 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { mySelect, tattiche, listaTattiche, data } from "../Funzioni/schemi";
 
 const IndicatoreGiocatoriImpr = (props) => {
   const { extractedPlayer } = props;
-  const [schema, setSchema] = useState("4-4-2");
+  const [schema, setSchema] = useState(() => {
+    const saved = localStorage.getItem("schema");
+    const initialValue = JSON.parse(saved);
+    return initialValue || "4-2-3-1";
+  });
+
   const selectRef = useRef(null);
   const getSchema = () => {
     setSchema(selectRef.current.value);
   };
+
+  useEffect(() => {
+    localStorage.setItem("schema", JSON.stringify(schema));
+  }, [schema]);
 
   const filteredTactics = listaTattiche.filter((item) => item.nome === schema);
 
@@ -38,13 +47,14 @@ const IndicatoreGiocatoriImpr = (props) => {
   return (
     <div className="flex flex-col h-full w-1/4 items-center justify-between py-2">
       <div className="flex w-full flex-col-reverse justify-center">
+        <strong>{schema}</strong>
         {schema &&
           filteredTactics[0].formazione.map((el, i, array) =>
-            tactics(data, el === 1 ? 0 : array[i - 1], el),
+          tactics(data, el === 1 ? 0 : array[i - 1], el),
           )}
       </div>
       <div className="">
-        {mySelect("Schema", selectRef, getSchema, tattiche)}
+        {mySelect("Scegli lo schema", selectRef, getSchema, tattiche)}
       </div>
     </div>
   );
