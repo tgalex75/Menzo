@@ -25,7 +25,7 @@ const RiepilogoImprevisti = () => {
   };
 
   return (
-    <section className="flex h-full w-full flex-col items-center justify-center gap-12 p-4 font-bold">
+    <section className="flex h-full w-full flex-col items-center justify-center gap-12 px-4 pb-6 font-bold">
       <h1>Riepilogo Imprevisti</h1>
       <motion.div
         initial={{ opacity: 0 }}
