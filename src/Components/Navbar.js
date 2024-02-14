@@ -27,7 +27,8 @@ const Navbar = () => {
       voceLi: "Area Calciomercato",
       linkTo: "/mercato",
     },
-    { id: 4, voceLi: "Media Overall ", linkTo: "/calcolo-media" },
+    { id: 4, voceLi: "Media Overall", linkTo: "/calcolo-media" },
+    { id: 5, voceLi: "Riepilogo imprevisti", linkTo: "/riepilogo-imprevisti" },
   ];
 
   //Sostituire div con <Link> from react-router
