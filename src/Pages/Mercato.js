@@ -1,25 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Dado from "../Components/Dado";
 import { motion } from "framer-motion";
 import { supabase } from "../supabaseClient";
-import random from "random";
 import { v4 as uuidv4 } from "uuid";
 
 const Mercato = () => {
-  const [datiMercato, setDatiMercato] = useState(null);
+  const [datiMercato, setDatiMercato] = useState([]);
   const [casuale, setCasuale] = useState("");
   const [registroAree, setRegistroAree] = useState([]);
 
   useEffect(() => {
     fetchLista();
     fetchAree();
-  }, []);
+    setTimeout(() => {
+      delElemento(casuale.id);
+      casuale.nazione !== null && insertArea(casuale);
+    }, 1000);
+  }, [casuale]);
 
   const fetchLista = async () => {
     let { data: zz_menzo_mercato, error } = await supabase
       .from("zz_menzo_mercato")
       .select("*");
     setDatiMercato(zz_menzo_mercato ? zz_menzo_mercato : console.log(error));
+  };
+
+  const estrattoCasuale = async () => {
+    const { data } = await supabase
+      .from("ordine_casuale_mercato")
+      .select("*")
+      .limit(1)
+      .single();
+    setCasuale(data ? data : []);
   };
 
   const fetchAree = async () => {
@@ -38,30 +50,29 @@ const Mercato = () => {
   const insertArea = async (country) => {
     const { data, error } = await supabase
       .from("regAree")
-      .insert([{ id: uuidv4(), area: country }])
+      .insert([{ id: country.id, area: country.nazione }])
       .select();
-      data ? console.log(data) : console.log(error)
+    data ? console.log(data) : console.log(error);
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      delElemento(casuale.id);
-      casuale.nazione != null && insertArea(casuale.nazione);
-    }, 1800);
-  }, [casuale]);
+  const addNewArea = async (country) => {
+    const { data, error } = await supabase
+      .from("zz_menzo_mercato")
+      .insert([{ nazione: country !== null && country.toUpperCase() }])
+      .select();
+    data ? console.log(data) : console.log(error);
+    fetchLista()
 
-  const estraiNumeroCasuale = () => {
-    setCasuale(random.choice(datiMercato));
-    fetchLista();
-    fetchAree();
   };
 
   const isNewArea = casuale.nazione !== null;
 
+  const newAreaRef = useRef("");
+
+
   return (
     <section className="flex h-full w-full select-none flex-col items-center justify-around gap-2 px-4 py-6 font-bold md:p-8">
       <h1>Area Calciomercato</h1>
-      {/* BOX PRIMA ESTRAZIONE */}
       <motion.div
         initial={{ opacity: 0, x: "-10vw" }}
         animate={{ opacity: 1, x: 0 }}
@@ -77,12 +88,93 @@ const Mercato = () => {
         }
         className="flex h-full w-full select-none flex-col items-center justify-center gap-6 rounded-xl bg-black/50 px-4 pb-4 text-center shadow-lg ring ring-inset ring-white/75 md:px-10 md:pb-8"
       >
+        <aside className="absolute left-1 top-0 flex h-full w-60 flex-col items-center py-2 text-gray-300">
+          <div className="flex h-2/5 w-full flex-col items-center">
+            <h6
+              style={{ filter: "drop-shadow(.05rem .05rem 0.1rem #000)" }}
+              className="text-md font-semibold uppercase"
+            >
+              Aree da sbloccare
+            </h6>
+            <ul className="flex h-auto w-full flex-col items-center justify-around gap-2 p-2 text-lg">
+              {datiMercato.map((el) => {
+                return (
+                  el.nazione !== null && (
+                    <li
+                      className="w-full rounded bg-orange-600/80 px-4 py-2 font-semibold"
+                      style={
+                        el.nazione === casuale.nazione
+                          ? {
+                              backgroundColor: "rgb(2 132 199 / 0.8)",
+                              marginLeft: "2rem",
+                              fontSize: "1.8rem",
+                            }
+                          : {}
+                      }
+                      key={el.id}
+                    >
+                      {el.nazione}
+                    </li>
+                  )
+                );
+              })}
+            </ul>
+          </div>
+          {/* AREE SBLOCCATE */}
+          <div className="flex h-2/5 w-full flex-col items-center">
+            <h6
+              style={{ filter: "drop-shadow(.05rem .05rem 0.1rem #000)" }}
+              className="text-md font-semibold uppercase"
+            >
+              Aree già sbloccate
+            </h6>
+            <ul className="flex h-auto w-full flex-col items-center justify-around gap-2 p-2 text-lg">
+              {registroAree.map((el) => {
+                return (
+                  el.area !== null && (
+                    <li
+                      className="w-full rounded bg-teal-600/80 px-4 py-2 font-semibold"
+                      key={el.id}
+                    >
+                      {el.area}
+                    </li>
+                  )
+                );
+              })}
+            </ul>
+          </div>
+          {/* INSERISCI NUOVA AREA NEL DB */}
+          <div className="flex h-1/5 w-full flex-col items-center gap-2 px-2">
+            <p className="w-3/4 font-medium text-gray-300">
+              INSERISCI NUOVA AREA NEL DB
+            </p>
+            <input
+              ref={newAreaRef}
+              className="w-full rounded px-4 py-2 text-center font-semibold text-zinc-950"
+              type="text"
+              id="newAreaInput"
+              name="newAreaInput"
+              placeholder="Inserisci area"
+            />
+            <button
+              type="submit"
+              onClick={() => addNewArea(newAreaRef.current.value)}
+              className="w-full rounded bg-purple-700 px-4 py-2 text-center font-semibold"
+            >
+              Inserisci
+            </button>
+          </div>
+        </aside>
+        
+        {/* PULSANTE AVVIO ESTRAZIONE */}
         {!casuale && (
           <h2
             style={{ fontFamily: "'Roboto', cursive" }}
-            className="text-5xl italic"
+            className="w-3/5 text-5xl italic"
           >
-            {registroAree.length > 4 ? "Hai sbloccato tutte le AREE MERCATO!" : "Avvia estrazione..."}
+            {datiMercato.length > 0
+              ? "Avvia estrazione..."
+              : "TUTTE LE AREE SONO STATE SBLOCCATE"}
           </h2>
         )}
 
@@ -92,7 +184,7 @@ const Mercato = () => {
               style={{ filter: "drop-shadow(.05rem .05rem 0.1rem #000)" }}
               className="text-4xl font-extrabold uppercase md:text-5xl"
             >
-              {isNewArea ? "NUOVA AREA DI MERCATO" : "Nessuna nuova area"}
+              {isNewArea ? "" : "Nessuna nuova area"}
             </h3>
             <p
               style={{
@@ -103,24 +195,10 @@ const Mercato = () => {
             >
               {casuale.nazione}
             </p>
-            {registroAree.length > 0 && (
-              <div className="absolute bottom-4 flex h-36 w-full flex-col items-center justify-between border-t-2 text-[--clr-sec]">
-                <h4 className="py-4">{registroAree.length <5 ? "Aree di Mercato già estratte" : "Tutte le Aree sono state Estratte"}</h4>
-                <div className="mb-4 flex items-center justify-around gap-12 px-24">
-                  {registroAree.slice(0, 5).map((el) => {
-                    return (
-                      <h3 id={el.id} className="mx-4 text-xl font-black">
-                        {el.area}
-                      </h3>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
           </>
         )}
       </motion.div>
-      { registroAree.length < 5 && Dado(estraiNumeroCasuale)}
+      {datiMercato.length > 0 && Dado(estrattoCasuale)}
     </section>
   );
 };

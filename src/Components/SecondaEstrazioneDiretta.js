@@ -39,7 +39,7 @@ const SecondaEstrazioneDiretta = (props) => {
                     player === 1 ? `url(${gkKit})` : `url(${firstkit})`,
                 }}
               >
-                <span className="block pt-2 font-['Oswald'] text-4xl font-bold text-[--clr-prim] md:mb-10 md:text-6xl" style={{color: player === 1 && "#d1d5db"}}>
+                <span className="block pt-2 font-['Oswald'] text-4xl font-bold text-[--clr-prim] md:mb-10 md:text-7xl" style={{color: player === 1 && "#d1d5db"}}>
                   {player}
                 </span>
               </div>

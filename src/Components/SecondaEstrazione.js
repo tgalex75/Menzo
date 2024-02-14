@@ -69,7 +69,7 @@ const SecondaEstrazione = () => {
           >
             <span
               style={{ color: secondExtractedNumber > 1 && "var(--clr-prim" }}
-              className="block pt-2 font-['Oswald'] text-4xl font-bold text-gray-300 md:pb-14 md:text-8xl"
+              className="block pt-2 font-['Oswald'] text-4xl font-bold text-gray-300 md:pb-14 md:text-9xl"
             >
               {secondExtractedNumber}
             </span>
