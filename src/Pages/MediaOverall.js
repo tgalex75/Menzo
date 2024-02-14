@@ -108,7 +108,7 @@ const MediaOverall = () => {
           "+5",
         ])}
       </div>
-      <h3 className="text-3xl font-black">{schema}</h3>
+      <h3 className="text-3xl font-black mb-8">{schema}</h3>
       {schema && tactics(data, handleChange, valoriOverall)}
       <div
         style={result < 1 ? { visibility: "hidden" } : {}}
