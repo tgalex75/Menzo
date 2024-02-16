@@ -50,10 +50,10 @@ h1 {
 }
 
 .t-dOnDMp {
-  position: absolute;
+  /* position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   width: 25vw;
   height: 60vh;
   border: 0.3rem solid var(--clr-prim);
