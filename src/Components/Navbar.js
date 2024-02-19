@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { supabase } from "../supabaseClient";
 import { isMobile } from "react-device-detect";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   const handleClick = () => {
@@ -18,6 +18,8 @@ const Navbar = () => {
       console.log(error);
     }
   };
+
+  const { user } = props;
 
   const dettagliMenu = [
     { id: 1, voceLi: "Home", linkTo: "/" },
@@ -39,8 +41,13 @@ const Navbar = () => {
           <motion.li
             layout
             whileHover={{ scale: isMobile ? 1.2 : 1.5 }}
-            transition={{ type: "spring", duration: 0.4, ease: "easeIn", stiffness: 200 }}
-            className="text-lg px-8 md:text-xl font-bold uppercase hover:text-[--clr-sec] p-4"
+            transition={{
+              type: "spring",
+              duration: 0.4,
+              ease: "easeIn",
+              stiffness: 200,
+            }}
+            className="p-4 px-8 text-lg font-bold uppercase hover:text-[--clr-sec] md:text-xl"
           >
             {voce.voceLi}
           </motion.li>
@@ -55,6 +62,12 @@ const Navbar = () => {
         style={isMobile ? { visibility: "hidden" } : {}}
         className="flex cursor-pointer items-center justify-center rounded-full p-2 hover:bg-gray-300/30"
       >
+        <small
+          className="absolute right-2 top-0 italic"
+          style={{ filter: "drop-shadow(.1rem .1rem 0.05rem #222)" }}
+        >
+          {user}
+        </small>
         <Link to="/">
           <MdHome
             size={36}
@@ -82,7 +95,7 @@ const Navbar = () => {
           />
         </Link>
       </div>
-      <div className="flex cursor-pointer items-center justify-center rounded-full p-1 md:p-2 hover:bg-gray-300/30">
+      <div className="flex cursor-pointer items-center justify-center rounded-full p-1 hover:bg-gray-300/30 md:p-2">
         {!isOpenMenu ? (
           <MdMenu
             size={isMobile ? 28 : 36}
@@ -102,7 +115,7 @@ const Navbar = () => {
         <ul
           style={isOpenMenu ? { right: 0 } : { right: "-100%" }}
           onClick={handleClick}
-          className="absolute top-0 z-[-1] flex h-screen w-full flex-col items-center pt-24 justify-start gap-24 bg-black/95 text-center text-gray-300 transition-[0.5s]"
+          className="absolute top-0 z-[-1] flex h-screen w-full flex-col items-center justify-start gap-24 bg-black/95 pt-24 text-center text-gray-300 transition-[0.5s]"
         >
           {linksMenu}
         </ul>

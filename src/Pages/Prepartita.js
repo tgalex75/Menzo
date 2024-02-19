@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { randomNumber } from "../Funzioni/RandomNumber";
 import datiPrepartita from "../Data/datiPrepartita";
 import SecondaEstrazione from "../Components/SecondaEstrazione";
@@ -6,9 +6,6 @@ import FetchImprevisto from "../Funzioni/FetchImprevisto";
 import LayoutBase from "../Components/LayoutBase";
 import Dado from "../Components/Dado";
 import SecondaEstrazioneDiretta from "../Components/SecondaEstrazioneDiretta";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { supabase } from "../supabaseClient";
 
 const Prepartita = () => {
   const [casuale, setCasuale] = useState(null);
@@ -26,22 +23,6 @@ const Prepartita = () => {
   const titoloH1 = "Imprevisto Prepartita";
   const isImpCommunity = title === "PAROLA ALLA COMMUNITY!";
   const numbExtrPlayer = 5;
-
-  const [session, setSession] = useState(null);
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
 
   return (
     <>
@@ -85,35 +66,7 @@ const Prepartita = () => {
               </>
             ) : (
               <>
-                {!session ? (
-                  <div className="absolute left-1/2 top-1/2 flex h-4/5 w-4/5 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 border-2 border-[--clr-prim] py-2 rounded-2xl bg-neutral-900">
-                    <h3 className="text-2xl text-[--clr-sec]">ATTENZIONE!</h3>
-                    <span >Funzionalità disponibile solo se loggati</span>
-                    <Auth
-                      supabaseClient={supabase}
-                      appearance={{ theme: ThemeSupa }}
-                      showLinks={false}
-                      theme="dark"
-                      providers={[]}
-                      localization={{
-                        variables: {
-                          sign_in: {
-                            email_label: "Il tuo indirizzo email",
-                            password_label: "La tua password",
-                            email_input_placeholder:
-                              "Inserisci il tuo indirizzo email",
-                            password_input_placeholder:
-                              "Inserisci la tua password",
-                          },
-                        },
-                      }}
-                      className="w-1/2"
-                    />
-                    <span >Se non disponi di un account effettua un'altra estrazione</span>
-                  </div>
-                ) : (
-                  <FetchImprevisto />
-                )}
+                <FetchImprevisto />
               </>
             )}
             {ultEstrazione && id !== 4 ? <SecondaEstrazione /> : ""}

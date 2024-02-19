@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { mySelect, tattiche, listaTattiche, data } from "../Funzioni/schemi";
+import { v4 as uuidv4 } from "uuid";
 
 const IndicatoreGiocatoriImpr = (props) => {
   const { extractedPlayer } = props;
@@ -26,7 +27,7 @@ const IndicatoreGiocatoriImpr = (props) => {
         <div className="flex items-center gap-6">
           {arr.slice(start, end).map((el) => (
             <div
-              key={el.id}
+              key={uuidv4()}
               className="my-2 flex w-2 items-center justify-center rounded-lg border px-4 py-1 text-xs font-semibold text-gray-200"
               style={
                 extractedPlayer.find((item) => item === el.nome) && {

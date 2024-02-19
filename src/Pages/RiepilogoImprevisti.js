@@ -43,7 +43,7 @@ const RiepilogoImprevisti = () => {
                 el.title.toUpperCase() !== "NESSUN IMPREVISTO" && (
                   <li
                     key={el.id}
-                    className="flex items-center justify-start gap-8 bg-gray-700/20 py-1 ps-2 text-left text-sm"
+                    className="flex items-center justify-start gap-8 bg-gray-700/20 py-1 ps-2 text-left text-sm hover:bg-gray-600/50"
                   >
                     <strong className="uppercase">{el.title}</strong>
                     <em className="font-medium">{el.description}</em>
@@ -63,7 +63,7 @@ const RiepilogoImprevisti = () => {
             {vociRegistro.map((el) => (
               <li
                 key={el.id}
-                className="flex items-center justify-between bg-gray-700/20 py-1 ps-2 text-left text-md font-normal"
+                className="text-md flex items-center justify-between bg-gray-700/20 py-1 ps-2 text-left font-normal hover:bg-gray-600/50"
               >
                 <span className="w-[95%]">{el.descrizione}</span>
                 <MdClear

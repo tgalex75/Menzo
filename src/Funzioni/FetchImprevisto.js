@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 
-export default function FetchData() {
+export default function FetchImprevisto() {
   const [imprevisto, setImprevisto] = useState([]);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function FetchData() {
   useEffect(() => {
     setTimeout(() => {
       delElemento();
-    }, 3000);
+    }, 2000);
   });
 
   const fetchLista = async () => {
@@ -20,7 +20,7 @@ export default function FetchData() {
       .select("*")
       .limit(1)
       .single();
-    setImprevisto(data ? data : { id: 0, name: "LISTA VUOTA!!!" });
+    setImprevisto(data ? data : { id: 0, descrizione: "LISTA VUOTA!!!" });
   };
   
   const delElemento = async () => {

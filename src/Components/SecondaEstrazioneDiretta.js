@@ -11,8 +11,6 @@ const SecondaEstrazioneDiretta = (props) => {
   const numbers = data.map((player) => player.id);
   const extractedPlayer = pickRandom(numbers, { count: numbExtrPlayer });
 
-  console.log(extractedPlayer);
-
   return (
     <section
       id="secEstrDiretta"
