@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { supabase } from "../supabaseClient";
 import { isMobile } from "react-device-detect";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   const handleClick = () => {
@@ -18,8 +18,6 @@ const Navbar = (props) => {
       console.log(error);
     }
   };
-
-  const { user } = props;
 
   const dettagliMenu = [
     { id: 1, voceLi: "Home", linkTo: "/" },
@@ -62,12 +60,6 @@ const Navbar = (props) => {
         style={isMobile ? { visibility: "hidden" } : {}}
         className="flex cursor-pointer items-center justify-center rounded-full p-2 hover:bg-gray-300/30"
       >
-        <small
-          className="absolute right-2 top-0 italic"
-          style={{ filter: "drop-shadow(.1rem .1rem 0.05rem #222)" }}
-        >
-          {user}
-        </small>
         <Link to="/">
           <MdHome
             size={36}
@@ -115,7 +107,7 @@ const Navbar = (props) => {
         <ul
           style={isOpenMenu ? { right: 0 } : { right: "-100%" }}
           onClick={handleClick}
-          className="absolute top-0 z-[-1] flex h-screen w-full flex-col items-center justify-start gap-24 bg-black/95 pt-24 text-center text-gray-300 transition-[0.5s]"
+          className="absolute top-0 z-[-1] flex h-screen w-full flex-col items-center justify-center gap-24 bg-black/95 text-center text-gray-300 transition-[0.5s]"
         >
           {linksMenu}
         </ul>

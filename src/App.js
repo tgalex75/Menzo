@@ -38,10 +38,10 @@ function App() {
         localization={{
           variables: {
             sign_in: {
-              email_label: 'Il tuo indirizzo email',
-              password_label: 'La tua password',
+              email_label: "Il tuo indirizzo email",
+              password_label: "La tua password",
               email_input_placeholder: "Inserisci il tuo indirizzo email",
-              password_input_placeholder: 'Inserisci la tua password',
+              password_input_placeholder: "Inserisci la tua password",
             },
           },
         }}
@@ -52,10 +52,10 @@ function App() {
     return (
       <main className="h-screen w-screen overflow-hidden">
         <Router>
-          <Navbar user={session.user.email} />
+          <Navbar />
           <AnimatedRoutes />
         </Router>
-        <Footer />
+        <Footer user={session.user.email} />
         <Sfondo />
       </main>
     );
