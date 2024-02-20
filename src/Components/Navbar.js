@@ -2,21 +2,25 @@ import React, { useState } from "react";
 import { MdHome, MdMenu, MdClose, MdLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { supabase } from "../supabaseClient";
+import { useAuth } from "../context/Auth";
 import { isMobile } from "react-device-detect";
 
 const Navbar = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
+  const { signOut } = useAuth();
+
   const handleClick = () => {
     setIsOpenMenu((prevMenu) => !prevMenu);
   };
 
-  const logOut = async () => {
-    const { error } = await supabase.auth.signOut();
+  const logOut = async (e) => {
+    e.preventDefault();
+    const { error } = await signOut();
     if (error) {
       console.log(error);
     }
+    handleClick();
   };
 
   const dettagliMenu = [
@@ -31,7 +35,6 @@ const Navbar = () => {
     { id: 5, voceLi: "Riepilogo imprevisti", linkTo: "/riepilogo-imprevisti" },
   ];
 
-  //Sostituire div con <Link> from react-router
   const linksMenu = dettagliMenu.map((voce) => {
     return (
       <div key={voce.id}>

@@ -1,44 +1,67 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { supabase } from '../supabase'
+import { createContext, useContext, useEffect, useState } from "react";
+import { supabase } from "../supabaseClient";
 
-const AuthContext = React.createContext()
+const AuthContext = createContext({});
 
-export function useAuth() {
-  return useContext(AuthContext)
-}
+export const useAuth = () => useContext(AuthContext);
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState()
-  const [loading, setLoading] = useState(true)
+const login = (email, password) =>
+  supabase.auth.signInWithPassword({ email, password });
+
+const signOut = () => supabase.auth.signOut();
+
+const passwordReset = (email) =>
+  supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: "http://localhost:5173/update-password"
+  });
+
+const updatePassword = (updatedPassword) =>
+  supabase.auth.updateUser({ password: updatedPassword });
+
+const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const session = supabase.auth.session()
-
-    setUser(session?.user ?? null)
-    setLoading(false)
-
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user ?? null)
-        setLoading(false)
+    setLoading(true);
+    const getUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      const { user: currentUser } = data;
+      setUser(currentUser ?? null);
+      setAuth(currentUser ? true : false);
+      setLoading(false);
+    };
+    getUser();
+    const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "PASSWORD_RECOVERY") {
+        setAuth(false);
+      } else if (event === "SIGNED_IN") {
+        setUser(session.user);
+        setAuth(true);
+      } else if (event === "SIGNED_OUT") {
+        setAuth(false);
+        setUser(null);
       }
-    )
-
+    });
     return () => {
-      listener?.unsubscribe()
-    }
-  }, [])
-
-  const value = {
-    signUp: (data) => supabase.auth.signUp(data),
-    signIn: (data) => supabase.auth.signIn(data),
-    signOut: () => supabase.auth.signOut(),
-    user,
-  }
+      data.subscription.unsubscribe();
+    };
+  }, []);
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider
+      value={{
+        auth,
+        user,
+        login,
+        signOut,
+        passwordReset,
+        updatePassword
+      }}>
       {!loading && children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
+
+export default AuthProvider;
