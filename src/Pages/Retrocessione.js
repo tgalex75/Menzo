@@ -1,32 +1,17 @@
-import React, { useState, useEffect } from "react";
-import FetchImprevisto from "../Funzioni/FetchImprevisto";
+import React, { useState } from "react";
+import datiRetrocessione from "../Data/datiRetrocessione"
+import random from "random";
 import LayoutBase from "../Components/LayoutBase";
 import Dado from "../Components/Dado";
-import { supabase } from "../supabaseClient";
 
 const Retrocessione = () => {
-  const [casuale, setCasuale] = useState(null);
+  const [casuale, setCasuale] = useState("");
 
-  const { id, title, description } = casuale ;
-
-  /* useEffect(() => {
-    setTimeout(() => {
-      delElemento();
-    }, 3000);
-  }); */
-
-  const fetchLista = async () => {
-    const { data } = await supabase
-      .from("ordine_casuale")
-      .select("*")
-      .limit(1)
-      .single();
-    setCasuale(data ? data : { id: 0, name: "LISTA VUOTA!!!" });
-  };
-
-  const estraiNumeroCasuale = () => {
-    console.log("fdfdfd");
-  };
+  const fetchLista = () => {
+    setCasuale(random.choice(datiRetrocessione))
+  }
+  
+  const { id, title, description } = casuale;
 
   const titoloH1 = "Imprevisto Retrocessione";
 
@@ -34,29 +19,15 @@ const Retrocessione = () => {
     <>
       <LayoutBase titoloH1={titoloH1} id={id} casuale={casuale}>
         {casuale && (
-          <>
-            <h2
-              style={{
-                fontFamily: "'Rubik Scribble', sans-serif",
-                filter: "drop-shadow(.05rem .05rem 0.1rem #000)",
-              }}
-            ></h2>
-
-            <h3
-              style={{ filter: "drop-shadow(.05rem .05rem 0.1rem #000)" }}
-              className={`text-4xl font-extrabold uppercase md:flex-1 md:text-5xl ${
-                id === 6 && "hidden"
-              }`}
-            >
-              {title}
-            </h3>
+          <section className="flex flex-col items-center justify-center gap-8 text-[--clr-prim]">
+            <h2 className="text-5xl">{title} {id}</h2>
             <p
               style={{ fontFamily: "'Roboto', cursive" }}
-              className="mt-4 px-4 text-xl md:flex-1 md:text-3xl"
+              className="px-12 md:w-3/5 md:flex-1 md:text-3xl italic"
             >
               {description}
             </p>
-          </>
+          </section>
         )}
       </LayoutBase>
       {Dado(fetchLista)}
