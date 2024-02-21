@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
-const Register = () => {
+const Signup = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
@@ -36,55 +36,59 @@ const Register = () => {
       );
       if (!error && data) {
         setMsg(
-          "Registration Successful. Check your email to confirm your account",
+          "Registrazione effettuata con successo. Verifica la tua mail per confermare il tuo account",
         );
       }
     } catch (error) {
-      setErrorMsg("Error in Creating Account");
+      setErrorMsg("Errore  durante la creazione dell'account");
     }
     setLoading(false);
   };
 
   return (
-    <main className="flex h-screen w-full flex-col items-center justify-center">
+    <main className="flex h-screen w-full flex-col items-center justify-center gap-2">
+      <h2 className="text-lg font-semibold">Effettua la Registrazione</h2>
       <form
         onSubmit={handleSubmit}
-        className="flex h-1/2 w-1/3 flex-col items-center justify-around rounded-lg border-2 border-[--clr-prim] p-4"
+        className="flex h-2/3 w-3/4 flex-col items-center justify-around rounded-lg border-2 border-[--clr-prim] p-4 md:h-1/2 md:w-1/3"
       >
-        <div id="email" className="flex flex-col items-center gap-1 w-full">
+        <div id="email" className="flex w-full flex-col items-center gap-1">
           <label>Email</label>
           <input
-            className="rounded-md p-1 font-semibold text-black w-full"
+            className="w-full rounded-md p-1 font-semibold text-black"
             type="email"
             ref={emailRef}
             required
           />
         </div>
-        <div id="password" className="flex flex-col items-center gap-1 w-full">
+        <div id="password" className="flex w-full flex-col items-center gap-1">
           <label>Password</label>
           <input
-            className="rounded-md p-1 font-semibold text-black w-full"
+            className="w-full rounded-md p-1 font-semibold text-black"
             type="password"
             ref={passwordRef}
             required
           />
         </div>
-        <div id="confir-password" className="flex flex-col items-center gap-1 w-full">
+        <div
+          id="confirm-password"
+          className="flex w-full flex-col items-center gap-1"
+        >
           <label>Confirm Password</label>
           <input
-            className="rounded-md p-1 font-semibold text-black w-full"
+            className="w-full rounded-md p-1 font-semibold text-black"
             type="password"
             ref={confirmPasswordRef}
             required
           />
         </div>
         {errorMsg && (
-          <alert variant="danger" onClose={() => setErrorMsg("")} dismissible>
+          <alert  onClose={() => setErrorMsg("")} dismissible>
             {errorMsg}
           </alert>
         )}
         {msg && (
-          <alert variant="success" onClose={() => setMsg("")} dismissible>
+          <alert onClose={() => setMsg("")} dismissible>
             {msg}
           </alert>
         )}
@@ -94,21 +98,21 @@ const Register = () => {
             type="submit"
             className="w-50 rounded-md border border-[--clr-prim] px-6 py-2 font-semibold hover:bg-[--clr-prim]"
           >
-            Register
+            Registrati
           </button>
         </div>
       </form>
       <div className="w-100 mt-2 text-center font-semibold">
-        Already a User?{" "}
+        Hai già un account?{" "}
         <Link
-          className="text-[--clr-prim] hover:text-[--clr-sec] "
+          className="text-[--clr-prim] hover:text-[--clr-sec] block"
           to={"/login"}
         >
-          Login
+          Effettua il Login
         </Link>
       </div>
     </main>
   );
 };
 
-export default Register;
+export default Signup;

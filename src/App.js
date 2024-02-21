@@ -8,6 +8,8 @@ import AuthProvider from "./context/Auth";
 import AuthRoute from "./Components/AuthRoute";
 import Login from "./Pages/Auth/Login";
 import Signup from "./Pages/Auth/Signup";
+import PasswordReset from "./Pages/Auth/PasswordReset";
+import UpdatePassword from "./Pages/Auth/UpdatePassword";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
             </Route>
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/password-reset" element={<PasswordReset />} />
+            <Route path="/update-password" element={<UpdatePassword />} />
           </Routes>
           <Footer />
         </AuthProvider>

@@ -16,7 +16,7 @@ const Login = () => {
       setErrorMsg("");
       setLoading(true);
       if (!passwordRef.current?.value || !emailRef.current?.value) {
-        setErrorMsg("Please fill in the fields");
+        setErrorMsg("Si prega di compilare tutti i campi");
         return;
       }
       const {
@@ -26,16 +26,17 @@ const Login = () => {
       if (error) setErrorMsg(error.message);
       if (user && session) navigate("/");
     } catch (error) {
-      setErrorMsg("Email or Password Incorrect");
+      setErrorMsg("Email o Password non corrette");
     }
     setLoading(false);
   };
 
   return (
-    <main className="flex h-screen w-full flex-col items-center justify-center">
+    <main className="flex h-screen w-full gap-2 flex-col items-center justify-center">
+      <h2 className="font-semibold text-lg">Effettua il Login</h2>
       <form
         onSubmit={handleSubmit}
-        className="flex h-1/2 w-1/3 flex-col items-center justify-around rounded-lg border-2 border-[--clr-prim] p-4"
+        className="flex h-2/3 md:h-1/2 w-3/4 md:w-1/3 flex-col items-center justify-around rounded-lg border-2 border-[--clr-prim] p-4"
       >
         <div id="email" className="flex flex-col items-center gap-1 w-full">
           <label>Email</label>
@@ -60,11 +61,11 @@ const Login = () => {
             {errorMsg}
           </alert>
         )}
-        <div className="mt-2 text-center">
+        <div className="mt-2 text-center w-full">
           <button
             disabled={loading}
             type="submit"
-            className="w-50 rounded-md border border-[--clr-prim] px-6 py-2 font-semibold hover:bg-[--clr-prim]"
+            className="w-full md:w-1/2 h-auto rounded-md border border-[--clr-prim] px-0 md:px-6 py-2 font-semibold hover:bg-[--clr-prim]"
           >
             Login
           </button>
@@ -72,6 +73,9 @@ const Login = () => {
       </form>
       <div className="w-100 mt-2 text-center font-semibold">
         Nuovo Utente? <Link className="text-[--clr-prim] hover:text-[--clr-sec] " to={"/signup"}>Registrati</Link>
+      </div>
+      <div className="w-100 mt-2 text-center font-semibold">
+        Password dimenticata? <Link className="text-[--clr-prim] hover:text-[--clr-sec] " to={"/password-reset"}>Clicca qui</Link>
       </div>
     </main>
   );

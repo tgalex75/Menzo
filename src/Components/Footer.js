@@ -7,13 +7,7 @@ const Footer = () => {
   const { user } = useAuth();
 
   return (
-    <div
-      className={
-        isMobile
-          ? "hidden"
-          : "fixed bottom-0 left-0 z-10 m-1 flex w-full items-center justify-between text-sm"
-      }
-    >
+    <div className="fixed bottom-0 left-0 z-10 m-1 hidden w-full items-center justify-between text-sm md:flex">
       <small className="ms-4 w-1/3 opacity-20">
         coded by tgalex75 - Menzo Community - beta version
       </small>
