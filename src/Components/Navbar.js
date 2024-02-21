@@ -22,13 +22,14 @@ const Navbar = () => {
   const dettagliMenu = [
     { id: 1, voceLi: "Home", linkTo: "/" },
     { id: 2, voceLi: "Imprevisto Prepartita", linkTo: "/prepartita" },
+    { id: 3, voceLi: "Imprevisto Retrocessione", linkTo: "/retrocessione" },
     {
-      id: 3,
+      id: 4,
       voceLi: "Area Calciomercato",
       linkTo: "/mercato",
     },
-    { id: 4, voceLi: "Media Overall", linkTo: "/calcolo-media" },
-    { id: 5, voceLi: "Riepilogo imprevisti", linkTo: "/riepilogo-imprevisti" },
+    { id: 5, voceLi: "Media Overall", linkTo: "/calcolo-media" },
+    { id: 6, voceLi: "Riepilogo imprevisti", linkTo: "/riepilogo-imprevisti" },
   ];
 
   //Sostituire div con <Link> from react-router
