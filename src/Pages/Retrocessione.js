@@ -11,7 +11,7 @@ const Retrocessione = () => {
     setCasuale(random.choice(datiRetrocessione))
   }
   
-  const { id, title, description } = casuale;
+  const { id, description } = casuale;
 
   const titoloH1 = "Imprevisto Retrocessione";
 
@@ -19,14 +19,14 @@ const Retrocessione = () => {
     <>
       <LayoutBase titoloH1={titoloH1} id={id} casuale={casuale}>
         {casuale && (
-          <section className="flex flex-col items-center justify-center gap-8 text-[--clr-prim]">
-            <h2 className="text-5xl">{title} {id}</h2>
+          <section className="flex flex-col items-center justify-center gap-8 text-[--clr-prim] uppercase italic">
             <p
               style={{ fontFamily: "'Roboto', cursive" }}
-              className="px-12 md:w-3/5 md:flex-1 md:text-3xl italic"
+              className="px-12 md:w-3/5 md:flex-1 md:text-5xl"
             >
               {description}
             </p>
+            <small>Imprevisto n. {id}</small>
           </section>
         )}
       </LayoutBase>
