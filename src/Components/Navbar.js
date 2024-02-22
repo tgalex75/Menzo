@@ -33,6 +33,7 @@ const Navbar = () => {
     },
     { id: 4, voceLi: "Media Overall", linkTo: "/calcolo-media" },
     { id: 5, voceLi: "Riepilogo imprevisti", linkTo: "/riepilogo-imprevisti" },
+    { id: 6, voceLi: "Editor imprevisti", linkTo: "/editor-imprevisti" },
   ];
 
   const linksMenu = dettagliMenu.map((voce) => {

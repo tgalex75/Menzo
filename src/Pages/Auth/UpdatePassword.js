@@ -29,6 +29,7 @@ const UpdatePassword = () => {
       if (!error) {
         navigate("/");
       }
+      console.log(data)
     } catch (error) {
       setErrorMsg(
         "Si è verificato un errore nell'aggiornamento della password. Si prega di riprovare.",

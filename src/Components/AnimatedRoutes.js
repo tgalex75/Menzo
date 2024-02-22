@@ -6,6 +6,7 @@ import Prepartita from "../Pages/Prepartita";
 import MediaOverall from "../Pages/MediaOverall";
 import Mercato from "../Pages/Mercato";
 import RiepilogoImprevisti from "../Pages/RiepilogoImprevisti";
+import EditorImprevisti from "../Pages/EditorImprevisti";
 import ErrorPage from "../Pages/ErrorPage";
 
 const AnimatedRoutes = () => {
@@ -19,6 +20,7 @@ const AnimatedRoutes = () => {
                 <Route path="/calcolo-media" element={<MediaOverall />} />
                 <Route path="/mercato" element={<Mercato />} />
                 <Route path="/riepilogo-imprevisti" element={<RiepilogoImprevisti />} />
+                <Route path="/editor-imprevisti" element={<EditorImprevisti />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </AnimatePresence>

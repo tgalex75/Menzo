@@ -99,8 +99,11 @@ const Mercato = () => {
                 return (
                   el.nazione !== null && (
                     <li
-                      className=" flex-1 rounded bg-orange-600/80 px-1 font-semibold md:w-full md:px-4 md:py-2"
-                      style={
+                      className={`flex-1 rounded bg-orange-600/80 px-1 font-semibold md:w-full md:px-4 md:py-2 ${
+                        el.nazione === casuale.nazione &&
+                        "bg-[#0284c7cc] text-lg md:ml-8 md:text-3xl border-2 border-[--clr-sec]"
+                      }`}
+                      /* style={
                         el.nazione === casuale.nazione
                           ? {
                               backgroundColor: "rgb(2 132 199 / 0.8)",
@@ -108,7 +111,7 @@ const Mercato = () => {
                               fontSize: "1.8rem",
                             }
                           : {}
-                      }
+                      } */
                       key={el.id}
                     >
                       {el.nazione}
@@ -142,14 +145,14 @@ const Mercato = () => {
             </ul>
           </div>
           {/* INSERISCI NUOVA AREA NEL DB */}
-          <div className="md:text-md text-xs flex w-full flex-col items-center gap-1 md:gap-2 border-t px-2 md:h-1/5 md:border-none">
+          <div className="md:text-md flex w-full flex-col items-center gap-1 border-t px-2 text-xs md:h-1/5 md:gap-2 md:border-none">
             <p className="w-3/4 font-medium text-gray-300">
-              INSERISCI NUOVA AREA NEL DB
+              INSERISCI NUOVA AREA
             </p>
-            <div className="gap-2 flex md:flex-col">
+            <div className="flex gap-2 md:flex-col w-full">
               <input
                 ref={newAreaRef}
-                className="w-2/3 md:w-full rounded px-4 py-1 md:py-2 text-center font-semibold text-zinc-950"
+                className="w-2/3 rounded px-4 py-1 text-center font-semibold text-zinc-950 md:w-full md:py-3"
                 type="text"
                 id="newAreaInput"
                 name="newAreaInput"
@@ -158,7 +161,7 @@ const Mercato = () => {
               <button
                 type="submit"
                 onClick={() => addNewArea(newAreaRef.current.value)}
-                className="w-1/3 md:w-full rounded bg-purple-700 px-4 py-1 md:py-2 text-center font-semibold"
+                className="w-1/3 rounded bg-purple-700 px-4 py-1 text-center font-semibold md:w-full md:py-3"
               >
                 Invia
               </button>
