@@ -103,15 +103,6 @@ const Mercato = () => {
                         el.nazione === casuale.nazione &&
                         "bg-[#0284c7cc] text-lg md:ml-8 md:text-3xl border-2 border-[--clr-sec]"
                       }`}
-                      /* style={
-                        el.nazione === casuale.nazione
-                          ? {
-                              backgroundColor: "rgb(2 132 199 / 0.8)",
-                              marginLeft: "2rem",
-                              fontSize: "1.8rem",
-                            }
-                          : {}
-                      } */
                       key={el.id}
                     >
                       {el.nazione}
