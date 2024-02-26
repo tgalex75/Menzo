@@ -1,19 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "../supabaseClient";
 import { motion } from "framer-motion";
-import { MdSend } from "react-icons/md";
+import { MdSend, MdClear } from "react-icons/md";
 //import datiPrepartita from "../Data/datiPrepartita";
 
 const EditorImprevisti = () => {
   const [vociRegistro, setVociRegistro] = useState([]);
-  const [nuovoimprevisto, setNuovoImprevisto] = useState(null);
 
   const AggiornaImprRef = useRef([]);
   const nuovoImprRef = useRef(null);
 
   const handleNewImpr = (e) => {
     e.preventDefault();
-    setNuovoImprevisto(nuovoImprRef.current.value);
     uploadNewImpr(nuovoImprRef);
   };
 
@@ -34,7 +32,23 @@ const EditorImprevisti = () => {
     setVociRegistro(data ? data : []);
   };
 
-  console.log(AggiornaImprRef.current.value);
+  const removeVociRegistro = async (element) => {
+    const { error } = await supabase
+      .from("zz_menzo_Imprevisti")
+      .delete()
+      .eq("id", element);
+    error && console.log(error);
+  };
+
+  const updateVociRegistro = async (element, ref) => {
+    const { data, error } = await supabase
+      .from("zz_menzo_Imprevisti")
+      .update({ descrizione: ref.current.value })
+      .eq("id", element)
+      .select();
+    console.log(data ? data : error);
+  };
+
 
   return (
     <section className="flex h-full w-full flex-col items-center justify-center gap-12 px-4 pb-6 font-bold">
@@ -63,12 +77,17 @@ const EditorImprevisti = () => {
                 <input
                   className="w-full bg-gray-800 pe-6"
                   placeholder={el.descrizione}
-                  ref={AggiornaImprRef[el.id]}
+                  ref={AggiornaImprRef}
+                />
+                <MdClear
+                  size={24}
+                  className="mx-2 cursor-pointer fill-red-600 transition-all hover:scale-125 hover:fill-red-500"
+                  onClick={() => removeVociRegistro(el.id)}
                 />
                 <MdSend
                   size={24}
                   className="cursor-pointer fill-[--clr-prim] transition-all hover:scale-125 hover:fill-[--clr-sec]"
-                  onClick={() => console.log(el.id)}
+                  onClick={() => updateVociRegistro(el.id, AggiornaImprRef)}
                 />
               </li>
             ))}
