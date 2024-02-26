@@ -7,18 +7,22 @@ import { MdSend, MdClear } from "react-icons/md";
 const EditorImprevisti = () => {
   const [vociRegistro, setVociRegistro] = useState([]);
 
-  const AggiornaImprRef = useRef([]);
-  const nuovoImprRef = useRef(null);
+  const aggiornaTitoloImprRef = useRef([]);
+  const aggiornaDescImprRef = useRef([]);
+  const nuovoImprTitoloRef = useRef(null);
+  const nuovoImprDescrRef = useRef(null);
 
   const handleNewImpr = (e) => {
     e.preventDefault();
-    uploadNewImpr(nuovoImprRef);
+    uploadNewImpr(nuovoImprTitoloRef, nuovoImprDescrRef);
   };
 
-  const uploadNewImpr = async (impr) => {
+  const uploadNewImpr = async (titolo, descr) => {
     const { data, error } = await supabase
       .from("zz_menzo_Imprevisti")
-      .insert([{ descrizione: impr.current.value }])
+      .insert([
+        { titolo: titolo.current.value, descrizione: descr.current.value },
+      ])
       .select();
     console.log(data ? data : console.log(error));
   };
@@ -40,18 +44,17 @@ const EditorImprevisti = () => {
     error && console.log(error);
   };
 
-  const updateVociRegistro = async (element, ref) => {
+  const updateVociRegistro = async (element, refTitolo, refDescr) => {
     const { data, error } = await supabase
       .from("zz_menzo_Imprevisti")
-      .update({ descrizione: ref.current.value })
+      .update({ titolo: refTitolo, descrizione: refDescr })
       .eq("id", element)
       .select();
     console.log(data ? data : error);
   };
 
-
   return (
-    <section className="flex h-full w-full flex-col items-center justify-center gap-12 px-4 pb-6 font-bold">
+    <section className="flex h-full w-full flex-col items-center justify-center gap-6 px-4 pb-6 font-bold">
       <h1>Editor Imprevisti</h1>
       <motion.div
         initial={{ opacity: 0 }}
@@ -61,7 +64,7 @@ const EditorImprevisti = () => {
       >
         {/* Lista Imprevisti Attuale */}
 
-        <div className="relative flex h-2/5 w-full flex-col gap-2">
+        <div className="relative flex h-3/5 w-full flex-col gap-2">
           <h3 className="text-center uppercase text-[--clr-prim]">
             Imprevisti della Community
           </h3>
@@ -75,19 +78,30 @@ const EditorImprevisti = () => {
                 className="text-md flex items-center justify-between bg-gray-700/20 py-1 ps-2 text-left font-normal hover:bg-gray-600/50"
               >
                 <input
-                  className="w-full bg-gray-800 pe-6"
+                  className="w-1/6 bg-gray-800 pe-6"
+                  placeholder={el.titolo}
+                  ref={(element) => (aggiornaTitoloImprRef.current[el.id] = element)}
+                />
+                <input
+                  className="w-5/6 bg-gray-800 pe-6"
                   placeholder={el.descrizione}
-                  ref={AggiornaImprRef}
+                  ref={(element) => (aggiornaDescImprRef.current[el.id] = element)}
                 />
                 <MdClear
                   size={24}
-                  className="mx-2 cursor-pointer fill-red-600 transition-all hover:scale-125 hover:fill-red-500"
+                  className="mx-2 cursor-pointer fill-red-600 transition-all hover:scale-125 hover:fill-[--clr-sec]"
                   onClick={() => removeVociRegistro(el.id)}
                 />
                 <MdSend
                   size={24}
                   className="cursor-pointer fill-[--clr-prim] transition-all hover:scale-125 hover:fill-[--clr-sec]"
-                  onClick={() => updateVociRegistro(el.id, AggiornaImprRef)}
+                  onClick={() =>
+                    updateVociRegistro(
+                      el.id,
+                      aggiornaTitoloImprRef.current[el.id].value,
+                      aggiornaDescImprRef.current[el.id].value,
+                    )
+                  }
                 />
               </li>
             ))}
@@ -96,23 +110,24 @@ const EditorImprevisti = () => {
 
         {/* Form "AGGIUNGI Imprevisti" */}
 
-        <div className="flex w-full flex-col items-center gap-2 p-8">
+        <div className="flex w-full h-2/5 flex-col items-center gap-2 p-8">
           <h3 className="text-center uppercase text-[--clr-prim]">
             Aggiungi il tuo imprevisto
           </h3>
-          <div className="flex h-full w-1/3 flex-col items-center justify-center self-start rounded-md border-4 p-2 font-normal">
+          <div className="flex h-full w-1/2 flex-col items-center justify-center rounded-md border-4 p-8 font-normal">
             <label className="my-1 block self-start text-xs">
               Titolo Imprevisto
             </label>
             <input
               className="block w-full rounded p-1  text-sm text-black"
-              disabled
+              placeholder="Titolo dell'imprevisto"
+              ref={nuovoImprTitoloRef}
             />
             <label className="my-1 block self-start text-xs">
               Dettagli Imprevisto
             </label>
             <textarea
-              ref={nuovoImprRef}
+              ref={nuovoImprDescrRef}
               rows={3}
               id="nuovoImprevistoInput"
               placeholder="Descrizione dell'imprevisto"
