@@ -61,14 +61,12 @@ const Mercato = () => {
       .insert([{ nazione: country !== null && country.toUpperCase() }])
       .select();
     data ? console.log(data) : console.log(error);
-    fetchLista()
-
+    fetchLista();
   };
 
   const isNewArea = casuale.nazione !== null;
 
   const newAreaRef = useRef("");
-
 
   return (
     <section className="flex h-full w-full select-none flex-col items-center justify-around gap-2 px-4 py-6 font-bold md:p-8">
@@ -86,31 +84,25 @@ const Mercato = () => {
               }
             : {}
         }
-        className="flex h-full w-full select-none flex-col items-center justify-center gap-6 rounded-xl bg-black/50 px-4 pb-4 text-center shadow-lg ring ring-inset ring-white/75 md:px-10 md:pb-8"
+        className="flex h-full w-full select-none flex-col items-center justify-center rounded-xl bg-black/50 px-4 pb-4 text-center shadow-lg ring ring-inset ring-white/75 md:gap-6 md:px-10 md:pb-8"
       >
-        <aside className="absolute left-1 top-0 flex h-full w-60 flex-col items-center py-2 text-gray-300">
-          <div className="flex h-2/5 w-full flex-col items-center">
+        <aside id="sx" className="absolute top-0 flex h-full flex-col items-center py-2 text-gray-300 md:left-1 md:w-60">
+          <div className="flex w-full flex-col items-center md:h-5/6">
             <h6
               style={{ filter: "drop-shadow(.05rem .05rem 0.1rem #000)" }}
-              className="text-md font-semibold uppercase"
+              className="md:text-md text-xs font-semibold uppercase"
             >
               Aree da sbloccare
             </h6>
-            <ul className="flex h-auto w-full flex-col items-center justify-around gap-2 p-2 text-lg">
+            <ul className="flex h-auto w-full flex-wrap items-center gap-2 p-1 text-xs md:flex-col md:justify-around md:p-2 md:text-lg">
               {datiMercato.map((el) => {
                 return (
                   el.nazione !== null && (
                     <li
-                      className="w-full rounded bg-orange-600/80 px-4 py-2 font-semibold"
-                      style={
-                        el.nazione === casuale.nazione
-                          ? {
-                              backgroundColor: "rgb(2 132 199 / 0.8)",
-                              marginLeft: "2rem",
-                              fontSize: "1.8rem",
-                            }
-                          : {}
-                      }
+                      className={`flex-1 rounded bg-orange-600/80 px-1 font-semibold md:w-full md:px-4 md:py-2 ${
+                        el.nazione === casuale.nazione &&
+                        "bg-[rgba(2,132,199,0.8)] text-lg md:ml-8 md:text-3xl border-2 border-[--clr-sec]"
+                      }`}
                       key={el.id}
                     >
                       {el.nazione}
@@ -120,20 +112,46 @@ const Mercato = () => {
               })}
             </ul>
           </div>
+          
+          {/* INSERISCI NUOVA AREA NEL DB */}
+          <div className="md:text-md flex w-full flex-col items-center gap-1 border-t px-2 text-xs md:h-1/6 md:gap-2 md:border-none">
+            <p className="w-3/4 font-medium text-gray-300">
+              INSERISCI NUOVA AREA
+            </p>
+            <div className="flex gap-2 md:flex-col w-full">
+              <input
+                ref={newAreaRef}
+                className="w-2/3 rounded px-4 py-1 text-center font-semibold text-zinc-950 md:w-full md:py-3"
+                type="text"
+                id="newAreaInput"
+                name="newAreaInput"
+                placeholder="Inserisci area"
+              />
+              <button
+                type="submit"
+                onClick={() => addNewArea(newAreaRef.current.value)}
+                className="w-1/3 rounded bg-purple-700 px-4 py-1 text-center font-semibold md:w-full md:py-3"
+              >
+                Invia
+              </button>
+            </div>
+          </div>
+        </aside>
+        <aside id="dx" className="absolute top-0 flex h-full flex-col items-center py-2 text-gray-300 md:right-1 md:w-60">
           {/* AREE SBLOCCATE */}
-          <div className="flex h-2/5 w-full flex-col items-center">
+          <div className="flex w-full flex-col items-center border-t md:h-2/5 md:border-none">
             <h6
               style={{ filter: "drop-shadow(.05rem .05rem 0.1rem #000)" }}
-              className="text-md font-semibold uppercase"
+              className="md:text-md text-xs font-semibold uppercase"
             >
               Aree già sbloccate
             </h6>
-            <ul className="flex h-auto w-full flex-col items-center justify-around gap-2 p-2 text-lg">
+            <ul className="flex h-auto w-full flex-wrap items-center gap-2 p-1 text-xs md:flex-col md:justify-around md:p-2 md:text-lg">
               {registroAree.map((el) => {
                 return (
                   el.area !== null && (
                     <li
-                      className="w-full rounded bg-teal-600/80 px-4 py-2 font-semibold"
+                      className=" flex-1 rounded bg-teal-600/80 px-1 font-semibold md:w-full md:px-4 md:py-2"
                       key={el.id}
                     >
                       {el.area}
@@ -143,34 +161,14 @@ const Mercato = () => {
               })}
             </ul>
           </div>
-          {/* INSERISCI NUOVA AREA NEL DB */}
-          <div className="flex h-1/5 w-full flex-col items-center gap-2 px-2">
-            <p className="w-3/4 font-medium text-gray-300">
-              INSERISCI NUOVA AREA NEL DB
-            </p>
-            <input
-              ref={newAreaRef}
-              className="w-full rounded px-4 py-2 text-center font-semibold text-zinc-950"
-              type="text"
-              id="newAreaInput"
-              name="newAreaInput"
-              placeholder="Inserisci area"
-            />
-            <button
-              type="submit"
-              onClick={() => addNewArea(newAreaRef.current.value)}
-              className="w-full rounded bg-purple-700 px-4 py-2 text-center font-semibold"
-            >
-              Inserisci
-            </button>
-          </div>
+          
         </aside>
-        
+
         {/* PULSANTE AVVIO ESTRAZIONE */}
         {!casuale && (
           <h2
             style={{ fontFamily: "'Roboto', cursive" }}
-            className="w-3/5 text-5xl italic"
+            className="w-3/5 text-xl italic md:text-5xl"
           >
             {datiMercato.length > 0
               ? "Avvia estrazione..."
