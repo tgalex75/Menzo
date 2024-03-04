@@ -33,10 +33,14 @@ const RiepilogoImprevisti = () => {
         transition={{ delay: 0.7, duration: 0.7 }}
         className="flex h-full w-full items-center gap-2 overflow-hidden rounded-lg bg-black/50 p-2 text-gray-300 md:flex-col"
       >
-        <div className="flex h-full w-full flex-col gap-2">
+        {/* IMPREVISTI PREPARTITA */}
+        <div className="relative flex h-full w-full flex-col gap-2">
           <h3 className="text-center uppercase text-[--clr-prim]">
             Imprevisti Prepartita
           </h3>
+          <strong className="absolute right-1 top-0 font-semibold italic">
+            Totale Imprevisti: {datiPrepartita.length}
+          </strong>
           <ul className="flex h-full w-full flex-col gap-1 overflow-y-auto px-2 pb-2">
             {datiPrepartita.map(
               (el) =>
@@ -52,18 +56,19 @@ const RiepilogoImprevisti = () => {
             )}
           </ul>
         </div>
+        {/* IMPREVISTI COMMUNITY */}
         <div className="relative flex h-full w-full flex-col gap-2">
           <h3 className="text-center uppercase text-[--clr-prim]">
             Imprevisti della Community
           </h3>
-          <strong className="absolute right-1 top-0 font-semibold">
-            # {vociRegistro.length}
+          <strong className="absolute right-1 top-0 font-semibold italic">
+            Totale Imprevisti: {vociRegistro.length}
           </strong>
           <ul className="flex h-full w-full flex-col gap-1 overflow-y-auto px-2 pb-2">
             {vociRegistro.map((el) => (
               <li
                 key={el.id}
-                className="flex items-center justify-between bg-gray-700/20 py-1 ps-2 text-left text-md font-normal"
+                className="text-md flex items-center justify-between bg-gray-700/20 py-1 ps-2 text-left font-normal"
               >
                 <span className="w-[95%]">{el.descrizione}</span>
                 <MdClear
