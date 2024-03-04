@@ -69,6 +69,13 @@ const prepartita = [
         isImprev: true,
         ultEstrazione: false
     },
+    {
+        id: 11,
+        title: "PAROLA ALLA COMMUNITY!",
+        description: "Verrà sorteggiato uno degli imprevisti della Community",
+        isImprev: true,
+        ultEstrazione: true
+    },
 ]
 
 export default prepartita;
