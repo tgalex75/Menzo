@@ -54,7 +54,7 @@ const IndicatoreGiocatoriImpr = (props) => {
   };
 
   return (
-    <div className="flex h-full w-1/4 flex-col items-center gap-6 pb-4">
+    <div className="flex h-full w-1/4 flex-col items-center justify-start gap-1 pb-2">
       <h5>{schema}</h5>
       <div className="flex w-full flex-col-reverse justify-center">
         {filteredTactics[0].formazione.map((el, i, array) =>
@@ -66,7 +66,7 @@ const IndicatoreGiocatoriImpr = (props) => {
         {panchina.map((el) => (
           <div
             key={uuidv4()}
-            className="my-2 flex w-1 items-center justify-center rounded-lg border bg-gray-900/80 px-3 py-1 text-[.6rem] font-semibold text-gray-200"
+            className="my-1 md:my-2 flex w-1 items-center justify-center rounded-lg border bg-gray-900/80 px-3 py-1 text-[.6rem] font-semibold text-gray-200"
             style={
               extractedPlayer.find((item) => item === el) &&
               extractedPlayerStyle

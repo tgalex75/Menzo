@@ -4,14 +4,13 @@ import pickRandom from "pick-random";
 import { data } from "../Funzioni/schemi";
 import IndicatoreGiocatoriImpr from "./IndicatoreGiocatoriImpr";
 import { isMobile } from "react-device-detect";
+import {v4 as uuidv4} from "uuid"
 
 const SecondaEstrazioneDiretta = (props) => {
   const { numbExtrPlayer } = props;
 
   const numbers = data.map((player) => player.id);
   const extractedPlayer = pickRandom(numbers, { count: numbExtrPlayer });
-
-  console.log(extractedPlayer);
 
   return (
     <section
@@ -29,10 +28,10 @@ const SecondaEstrazioneDiretta = (props) => {
           id="extractedPlayers"
           className="flex h-full md:w-3/4 flex-wrap items-center justify-around md:self-start rounded-lg md:flex-nowrap md:gap-4"
         >
-          {extractedPlayer.map((player, i) => {
+          {extractedPlayer.map((player) => {
             return (
               <div
-                key={i}
+                key={uuidv4()}
                 className="flex flex-col items-center justify-center overflow-hidden rounded bg-contain bg-center bg-no-repeat p-8 transition-all md:h-full md:w-full"
                 style={{
                   backgroundImage:
